@@ -1,14 +1,17 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
-```{r, echo=FALSE}
-#loading required libraries
-library(dplyr)
-library(ggplot2)
+
+```
+## 
+## Attaching package: 'dplyr'
+## 
+## The following object is masked from 'package:stats':
+## 
+##     filter
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
 ```
 
 ## Loading and preprocessing the data
@@ -16,7 +19,8 @@ library(ggplot2)
 We create a temporary data dir to unzip the data file if it wasn't unzipped already.
 The data is loaded into the activity data frame.
 
-```{r}
+
+```r
 #create data dir if doesn't exist yet
 if (!file.exists("data")) {
   dir.create("data")
@@ -34,7 +38,8 @@ We do not do any data preprocessing at this stage.
 
 ## What is mean total number of steps taken per day?
 
-```{r}
+
+```r
 activity_per_day <- activity %>%
   filter(! is.na(steps)) %>%
   group_by(date) %>%
@@ -42,13 +47,27 @@ activity_per_day <- activity %>%
 
 g <- ggplot(activity_per_day, aes(x=total_steps)) +
       geom_histogram(binwidth=1000, aes(fill = ..count..)) +
-      labs(x="Total Steps", y="# of Days", title="Histogram of total number of steps by day")
+      labs(x="Steps", y="# of Days", title="Histogram of total number of steps by day")
 print(g)
+```
 
-# calculate the mean and median total steps by day
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
+
+```r
+# calculate the mean and median total steps per day
 mean(activity_per_day$total_steps)
-median(activity_per_day$total_steps)
+```
 
+```
+## [1] 10766.19
+```
+
+```r
+median(activity_per_day$total_steps)
+```
+
+```
+## [1] 10765
 ```
 
 
