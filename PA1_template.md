@@ -1,4 +1,9 @@
-# Reproducible Research: Peer Assessment 1
+---
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: true
+---
 
 
 ```
@@ -47,14 +52,14 @@ activity_per_day <- activity %>%
 
 g <- ggplot(activity_per_day, aes(x=total_steps)) +
       geom_histogram(binwidth=1000, aes(fill = ..count..)) +
-      labs(x="Steps", y="# of Days", title="Histogram of total number of steps by day")
+      labs(x="Total Steps", y="# of Days", title="Histogram of total number of steps by day")
 print(g)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
 
 ```r
-# calculate the mean and median total steps per day
+# calculate the mean and median total steps by day
 mean(activity_per_day$total_steps)
 ```
 
