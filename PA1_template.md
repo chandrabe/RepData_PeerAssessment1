@@ -188,3 +188,31 @@ median(activity_per_day_no_missing$total_steps)
 The mean is the same as in the original dataset, the median is little greater and now equal to the mean.
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+We add the weekday and dayType (weekday or weekend) to the dataframe with the missing value filled.
+
+
+```r
+activity_no_missing$day <- wday(ymd(activity_no_missing$date))
+
+activity_no_missing$dayType <- "weekday"
+activity_no_missing[activity_no_missing$day==1,5]<-"weekend"
+activity_no_missing[activity_no_missing$day==6,5]<-"weekend"
+
+activity_no_missing$dayType <- as.factor(activity_no_missing$dayType)
+
+activity_avg_dayType <- aggregate(steps ~ interval + dayType, data = activity_no_missing, mean)
+```
+
+We plot the average number of steps taken on weekdays and on weekends
+
+
+```r
+g <- ggplot(activity_avg_dayType, aes(interval, steps)) + 
+        geom_line(aes(color=dayType)) + 
+        facet_grid(dayType ~ .) + 
+        labs(x="5-minute interval", y="Number of steps")
+print(g)
+```
+
+![plot of chunk unnamed-chunk-15](figure/unnamed-chunk-15-1.png) 
