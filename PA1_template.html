@@ -352,14 +352,17 @@ print(g)
 
 <p>We add the weekday and dayType (weekday or weekend) to the dataframe with the missing value filled.</p>
 
-<pre><code class="r">activity_no_missing$day &lt;- wday(ymd(activity_no_missing$date))
+<pre><code class="r"># put the day number in the day column (sunday=1 .... saturdat=6)
+activity_no_missing$day &lt;- wday(ymd(activity_no_missing$date))
 
-activity_no_missing$dayType &lt;- &quot;weekday&quot;
-activity_no_missing[activity_no_missing$day==1,5]&lt;-&quot;weekend&quot;
-activity_no_missing[activity_no_missing$day==6,5]&lt;-&quot;weekend&quot;
+activity_no_missing$dayType &lt;- &quot;weekday&quot; # initialize all to weekday
+activity_no_missing[activity_no_missing$day==1,5]&lt;-&quot;weekend&quot; # sunday wday==1
+activity_no_missing[activity_no_missing$day==6,5]&lt;-&quot;weekend&quot; # saturday wday==6
 
+# transform dayType to factor
 activity_no_missing$dayType &lt;- as.factor(activity_no_missing$dayType)
 
+# calculate the mean per interval per dayType
 activity_avg_dayType &lt;- aggregate(steps ~ interval + dayType, data = activity_no_missing, mean)
 </code></pre>
 
