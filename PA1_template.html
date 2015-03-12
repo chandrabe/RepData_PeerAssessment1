@@ -352,7 +352,7 @@ print(g)
 
 <p>We add the weekday and dayType (weekday or weekend) to the dataframe with the missing value filled.</p>
 
-<pre><code class="r"># put the day number in the day column (sunday=1 .... saturdat=6)
+<pre><code class="r"># put the day number in the day column (sunday=1 .... saturday=6)
 activity_no_missing$day &lt;- wday(ymd(activity_no_missing$date))
 
 activity_no_missing$dayType &lt;- &quot;weekday&quot; # initialize all to weekday

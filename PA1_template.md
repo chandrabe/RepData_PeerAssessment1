@@ -193,7 +193,7 @@ We add the weekday and dayType (weekday or weekend) to the dataframe with the mi
 
 
 ```r
-# put the day number in the day column (sunday=1 .... saturdat=6)
+# put the day number in the day column (sunday=1 .... saturday=6)
 activity_no_missing$day <- wday(ymd(activity_no_missing$date))
 
 activity_no_missing$dayType <- "weekday" # initialize all to weekday
